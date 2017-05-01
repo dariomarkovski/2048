@@ -7,3 +7,18 @@ C:\Users\dario\Documents\Visual Studio 2015\Projects\2048\2048\bin\Debug\2048.ex
 C:\Users\dario\Documents\Visual Studio 2015\Projects\2048\2048\bin\Debug\2048.pdb
 C:\Users\dario\Documents\Visual Studio 2015\Projects\2048\2048\obj\Debug\2048.exe
 C:\Users\dario\Documents\Visual Studio 2015\Projects\2048\2048\obj\Debug\2048.pdb
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\bin\Debug\2048.exe.config
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\2048.exe
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\2048.pdb
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\bin\Debug\2048.exe
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\bin\Debug\2048.pdb
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\2048.csprojResolveAssemblyReference.cache
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\_2048.Form1.resources
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\_2048.Menu.resources
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\_2048.Properties.Resources.resources
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\2048.csproj.GenerateResource.Cache
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\_2048.Play.resources
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\_2048.HowToPlay.resources
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\_2048.Settings.resources
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\_2048.NewGame.resources
+C:\College\4. Четврт семестар\Визуелно Програмирање\Proektna\2048\obj\Debug\_2048.HighScores.resources

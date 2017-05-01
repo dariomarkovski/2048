@@ -237,5 +237,19 @@ namespace _2048
                 if (moved) generateRandom();
             }
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var window = MessageBox.Show("Zacuvaj Napredok?", "Izlezi od igra?", MessageBoxButtons.YesNoCancel);
+            if(window == DialogResult.Yes)
+            {
+                MessageBox.Show("Progress is saved!");
+            }
+            else if(window == DialogResult.No)
+            {
+                MessageBox.Show("BYE FELICIA!");
+            }
+            e.Cancel = (window == DialogResult.Cancel);
+        }
     }
 }
