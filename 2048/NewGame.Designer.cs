@@ -52,6 +52,7 @@
             this.btnUltimate.TabIndex = 1;
             this.btnUltimate.Text = "Ultimate";
             this.btnUltimate.UseVisualStyleBackColor = true;
+            this.btnUltimate.Click += new System.EventHandler(this.btnUltimate_Click);
             // 
             // btnPractice
             // 
@@ -61,6 +62,7 @@
             this.btnPractice.TabIndex = 2;
             this.btnPractice.Text = "Practice";
             this.btnPractice.UseVisualStyleBackColor = true;
+            this.btnPractice.Click += new System.EventHandler(this.btnPractice_Click);
             // 
             // btnBack
             // 

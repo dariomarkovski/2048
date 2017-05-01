@@ -27,7 +27,7 @@ namespace _2048
         {
             this.Hide();
 
-            Form1 form1 = new Form1();
+            Form1 form1 = new Form1("normal");
             form1.ShowDialog();
 
             this.Close();
@@ -36,6 +36,26 @@ namespace _2048
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.No;
+            this.Close();
+        }
+
+        private void btnUltimate_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Form1 form1 = new Form1("ultimate");
+            form1.ShowDialog();
+
+            this.Close();
+        }
+
+        private void btnPractice_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Form1 form1 = new Form1("practice");
+            form1.ShowDialog();
+
             this.Close();
         }
     }

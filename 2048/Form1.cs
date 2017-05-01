@@ -12,14 +12,21 @@ namespace _2048
 {
     public partial class Form1 : Form
     {
-        Random rnd = new Random();
         TextBox[][] matrix;
+        Game game;
         int space = 10;
         int size = 80;
 
         public Form1()
         {
             InitializeComponent();
+            game = new Game();
+            generateMatrix();
+        }
+        public Form1(string mode)
+        {
+            InitializeComponent();
+            game = new Game(mode);
             generateMatrix();
         }
         private void generateMatrix()
@@ -45,197 +52,52 @@ namespace _2048
                     this.Controls.Add(matrix[i][j]);
                 }
             }
-            generateRandom();
+            getGameState();
         }
-        private void generateRandom()
+        private void getGameState()
         {
-            int counter = 0;
-            for (int i = 0; i < 4; i++)
+            string [][] matrixValues = game.getState();
+            for(int i = 0; i < matrix.Length; i++)
             {
-                for (int j = 0; j < 4; j++)
+                for(int j = 0; j < matrix[i].Length; j++)
                 {
-                    if (!matrix[i][j].Text.Equals(""))
-                        counter++;
+                    matrix[i][j].Text = matrixValues[i][j];
                 }
             }
-            label1.Text = counter.ToString();
-            if (counter == 16)
-            {
-                label1.Text = "can't";
-                return;
-            }
-            while (true)
-            {
-                int row = rnd.Next(0, 4);
-                int col = rnd.Next(0, 4);
-                label2.Text = row + " " + col;
-                if (matrix[row][col].Text.Equals(""))
-                {
-                    matrix[row][col].Text = "2";
-                    break;
-                }
-            }
+            btnUndo.Enabled = game.canUndo();
         }
-        
-
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void btnUndo_Click(object sender, EventArgs e)
         {
-            if(e.KeyCode == Keys.G)
+            game.undoMove();
+            getGameState();
+        }
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            if (keyData == Keys.Up)
             {
-                generateRandom();
+                game.updateState("up");
+                getGameState();
+                return true;
             }
-            if (e.KeyCode == Keys.Up)
+            if (keyData == Keys.Down)
             {
-                bool moved = false;
-                for (int k = 0; k < 4; k++)
-                {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        if (matrix[i][k].Text.Equals(""))
-                        {
-                            for (int j = i + 1; j < 4; j++)
-                            {
-                                if (!matrix[j][k].Text.Equals(""))
-                                {
-                                    matrix[i][k].Text = matrix[j][k].Text;
-                                    matrix[j][k].Text = "";
-                                    moved = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    for (int i = 0; i < 3; i++)
-                    {
-                        if (!matrix[i][k].Text.Equals("") && matrix[i][k].Text.Equals(matrix[i + 1][k].Text))
-                        {
-                            matrix[i][k].Text = (Convert.ToInt32(matrix[i][k].Text) * 2).ToString();
-                            matrix[i + 1][k].Text = "";
-                            for (int j = i + 1; j < 3; j++)
-                            {
-                                matrix[j][k].Text = matrix[j + 1][k].Text;
-                                matrix[j + 1][k].Text = "";
-                            }
-                            moved = true;
-                        }
-                    }
-                }
-                if (moved) generateRandom();
+                game.updateState("down");
+                getGameState();
+                return true;
             }
-            if(e.KeyCode == Keys.Down)
+            if (keyData == Keys.Right)
             {
-                bool moved = false;
-                for (int k = 0; k < 4; k++)
-                {
-                    for (int i = 3; i > 0; i--)
-                    {
-                        if (matrix[i][k].Text.Equals(""))
-                        {
-                            for (int j = i - 1; j >= 0 ; j--)
-                            {
-                                if (!matrix[j][k].Text.Equals(""))
-                                {
-                                    matrix[i][k].Text = matrix[j][k].Text;
-                                    matrix[j][k].Text = "";
-                                    moved = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    for (int i = 3; i > 0; i--)
-                    {
-                        if (!matrix[i][k].Text.Equals("") && matrix[i][k].Text.Equals(matrix[i - 1][k].Text))
-                        {
-                            matrix[i][k].Text = (Convert.ToInt32(matrix[i][k].Text) * 2).ToString();
-                            matrix[i - 1][k].Text = "";
-                            for (int j = i - 1; j >= 1; j--)
-                            {
-                                matrix[j][k].Text = matrix[j - 1][k].Text;
-                                matrix[j - 1][k].Text = "";
-                            }
-                            moved = true;
-                        }
-                    }
-                }
-                if (moved) generateRandom();
+                game.updateState("right");
+                getGameState();
+                return true;
             }
-            if (e.KeyCode == Keys.Right)
+            if (keyData == Keys.Left)
             {
-                bool moved = false;
-                for (int k = 0; k < 4; k++)
-                {
-                    for (int i = 3; i > 0; i--)
-                    {
-                        if (matrix[k][i].Text.Equals(""))
-                        {
-                            for (int j = i - 1; j >= 0; j--)
-                            {
-                                if (!matrix[k][j].Text.Equals(""))
-                                {
-                                    matrix[k][i].Text = matrix[k][j].Text;
-                                    matrix[k][j].Text = "";
-                                    moved = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    for (int i = 3; i > 0; i--)
-                    {
-                        if (!matrix[k][i].Text.Equals("") && matrix[k][i].Text.Equals(matrix[k][i-1].Text))
-                        {
-                            matrix[k][i].Text = (Convert.ToInt32(matrix[k][i].Text) * 2).ToString();
-                            matrix[k][i-1].Text = "";
-                            for (int j = i - 1; j >= 1; j--)
-                            {
-                                matrix[k][j].Text = matrix[k][j-1].Text;
-                                matrix[k][j-1].Text = "";
-                            }
-                            moved = true;
-                        }
-                    }
-                }
-                if (moved) generateRandom();
+                game.updateState("left");
+                getGameState();
+                return true;
             }
-            if (e.KeyCode == Keys.Left)
-            {
-                bool moved = false;
-                for (int k = 0; k < 4; k++)
-                {
-                    for (int i = 0; i < 4; i++)
-                    {
-                        if (matrix[k][i].Text.Equals(""))
-                        {
-                            for (int j = i + 1; j < 4; j++)
-                            {
-                                if (!matrix[k][j].Text.Equals(""))
-                                {
-                                    matrix[k][i].Text = matrix[k][j].Text;
-                                    matrix[k][j].Text = "";
-                                    moved = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    for (int i = 0; i < 3; i++)
-                    {
-                        if (!matrix[k][i].Text.Equals("") && matrix[k][i].Text.Equals(matrix[k][i + 1].Text))
-                        {
-                            matrix[k][i].Text = (Convert.ToInt32(matrix[k][i].Text) * 2).ToString();
-                            matrix[k][i + 1].Text = "";
-                            for (int j = i + 1; j < 3; j++)
-                            {
-                                matrix[k][j].Text = matrix[k][j + 1].Text;
-                                matrix[k][j + 1].Text = "";
-                            }
-                            moved = true;
-                        }
-                    }
-                }
-                if (moved) generateRandom();
-            }
+            return base.ProcessDialogKey(keyData);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
