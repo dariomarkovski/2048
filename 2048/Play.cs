@@ -10,29 +10,19 @@ using System.Windows.Forms;
 
 namespace _2048
 {
-    public partial class Play : Form
+    public partial class Play : Form, ITheme
     {
         public Play()
         {
             InitializeComponent();
+            if (Properties.Settings.Default.savedGame) btnContinue.Enabled = true;
+            else btnContinue.Enabled = false;
+            setTheme();
         }
 
-        private void tbUserName_TextChanged(object sender, EventArgs e)
+        public void setTheme()
         {
-            string line;
-            System.IO.StreamReader file = new System.IO.StreamReader("c:\\Test\\test.txt");
-            while((line = file.ReadLine()) != null)
-            {
-                if (line.Equals(tbUserName.Text))
-                {
-                    btnContinue.Enabled = true;
-                    return;
-                }
-                else
-                {
-                    btnContinue.Enabled = false;
-                }
-            }
+            Program.setTheme(this);
         }
 
         private void btnNewGame_Click(object sender, EventArgs e)
@@ -41,7 +31,12 @@ namespace _2048
 
             NewGame ng = new NewGame();
             if (ng.ShowDialog() == DialogResult.No)
+            {
                 this.Show();
+                if (Properties.Settings.Default.savedGame) btnContinue.Enabled = true;
+                else btnContinue.Enabled = false;
+                Invalidate();
+            }
             else
                 this.Close();
         }
@@ -61,6 +56,16 @@ namespace _2048
         {
             this.DialogResult = DialogResult.No;
             this.Close();
+        }
+
+        private void btnContinue_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form1 form1 = new Form1(Properties.Settings.Default.savedMode, Properties.Settings.Default.savedString);
+            if (form1.ShowDialog() == DialogResult.No)
+                this.Show();
+            else
+                this.Close();
         }
     }
 }

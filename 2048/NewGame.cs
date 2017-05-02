@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace _2048
 {
-    public partial class NewGame : Form
+    public partial class NewGame : Form, ITheme
     {
         public NewGame()
         {
@@ -21,41 +21,41 @@ namespace _2048
             ToolTip2.SetToolTip(this.btnUltimate, "Play until you lose, 1 UNDO!");
             ToolTip ToolTip3 = new ToolTip();
             ToolTip3.SetToolTip(this.btnPractice, "5 UNDOS!!!");
+            setTheme();
+        }
+
+        public void setTheme()
+        {
+            Program.setTheme(this);
         }
 
         private void btnNormal_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
-            Form1 form1 = new Form1("normal");
-            form1.ShowDialog();
-
-            this.Close();
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.No;
-            this.Close();
+            openGame("normal");
         }
 
         private void btnUltimate_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
-            Form1 form1 = new Form1("ultimate");
-            form1.ShowDialog();
-
-            this.Close();
+            openGame("ultimate");
         }
 
         private void btnPractice_Click(object sender, EventArgs e)
         {
+            openGame("practice");
+        }
+        private void openGame(string mode)
+        {
             this.Hide();
+            Form1 form1 = new Form1(mode);
+            if (form1.ShowDialog() == DialogResult.No)
+                this.Show();
+            else
+                this.Close();
 
-            Form1 form1 = new Form1("practice");
-            form1.ShowDialog();
-
+        }
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.No;
             this.Close();
         }
     }

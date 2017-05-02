@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace _2048
 {
-    public partial class Menu : Form
+    public partial class Menu : Form, ITheme
     {
         public Menu()
         {
             InitializeComponent();
+            setTheme();
+        }
+
+        public void setTheme()
+        {
+            Program.setTheme(this);
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -34,7 +40,10 @@ namespace _2048
 
             Settings s = new Settings();
             if (s.ShowDialog() == DialogResult.No)
+            {
                 this.Show();
+                setTheme();
+            }
             else
                 this.Close();
         }
@@ -54,5 +63,6 @@ namespace _2048
         {
             this.Close();
         }
+
     }
 }

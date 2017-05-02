@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace _2048
 {
-    public partial class HowToPlay : Form
+    public partial class HowToPlay : Form, ITheme
     {
         public HowToPlay()
         {
             InitializeComponent();
+            setTheme();
+        }
+
+        public void setTheme()
+        {
+            Program.setTheme(this);
         }
 
         private void btnBack_Click(object sender, EventArgs e)

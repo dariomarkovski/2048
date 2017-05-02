@@ -36,6 +36,23 @@ namespace _2048
             }
             rnd = new Random();
         }
+        public State(string _matrix)
+        {
+            matrix = new string[4][];
+            for (int i = 0; i < 4; i++)
+            {
+                matrix[i] = new string[4];
+                for (int j = 0; j < 4; j++)
+                {
+                    string str = _matrix[i * 4 + j].ToString();
+                    if (str.Equals(" "))
+                        matrix[i][j] = "";
+                    else
+                        matrix[i][j] = str;
+                }
+            }
+            rnd = new Random();
+        }
         private void generateRandom()
         {
             int counter = 0;
@@ -216,6 +233,33 @@ namespace _2048
                 if (moved) generateRandom();
             }
         }
-        public void isFinished() { }
+        public bool isFinished() {
+            for(int i = 0; i < matrix.Length; i++)
+            {
+                for(int j = 0; j < matrix[i].Length; j++)
+                {
+                    if( matrix[i][j].Equals("") || ( (i > 0) && matrix[i - 1][j].Equals(matrix[i][j]) ) 
+                        || ( (i < matrix.Length - 1) && matrix[i + 1][j].Equals(matrix[i][j]) ) || ( (j > 0) && matrix[i][j - 1].Equals(matrix[i][j]))
+                        || ( (j < matrix[i].Length - 1) && matrix[i][j + 1].Equals(matrix[i][j]) ))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        public string getStringFormat()
+        {
+            string returnString = "";
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                for (int j = 0; j < matrix[i].Length; j++)
+                {
+                    if (matrix[i][j].Equals("")) returnString += " ";
+                    else returnString += matrix[i][j];
+                }
+            }
+            return returnString;
+        }
     }
 }

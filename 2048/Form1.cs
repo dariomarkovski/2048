@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace _2048
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, ITheme
     {
         TextBox[][] matrix;
         Game game;
@@ -22,12 +22,23 @@ namespace _2048
             InitializeComponent();
             game = new Game();
             generateMatrix();
+            setTheme();
         }
         public Form1(string mode)
         {
             InitializeComponent();
             game = new Game(mode);
             generateMatrix();
+            setTheme();
+            DoubleBuffered = true;
+        }
+        public Form1(string mode, string _matrix)
+        {
+            InitializeComponent();
+            game = new Game(mode, _matrix);
+            generateMatrix();
+            setTheme();
+            DoubleBuffered = true;
         }
         private void generateMatrix()
         {
@@ -77,6 +88,7 @@ namespace _2048
             {
                 game.updateState("up");
                 getGameState();
+                if (game.isFinished()) MessageBox.Show("Game Over");
                 return true;
             }
             if (keyData == Keys.Down)
@@ -102,16 +114,19 @@ namespace _2048
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var window = MessageBox.Show("Zacuvaj Napredok?", "Izlezi od igra?", MessageBoxButtons.YesNoCancel);
-            if(window == DialogResult.Yes)
-            {
-                MessageBox.Show("Progress is saved!");
-            }
-            else if(window == DialogResult.No)
-            {
-                MessageBox.Show("BYE FELICIA!");
-            }
-            e.Cancel = (window == DialogResult.Cancel);
+            game.saveGame();
+        }
+
+        public void setTheme()
+        {
+            Program.setTheme(this);
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            game.saveGame();
+            this.DialogResult = DialogResult.No;
+            this.Close();
         }
     }
 }
