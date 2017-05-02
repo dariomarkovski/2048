@@ -32,10 +32,10 @@ namespace _2048
             setTheme();
             DoubleBuffered = true;
         }
-        public Form1(string mode, string _matrix)
+        public Form1(string mode, string _matrix, int score)
         {
             InitializeComponent();
-            game = new Game(mode, _matrix);
+            game = new Game(mode, _matrix, score);
             generateMatrix();
             setTheme();
             DoubleBuffered = true;
@@ -76,6 +76,7 @@ namespace _2048
                 }
             }
             btnUndo.Enabled = game.canUndo();
+            lblScore.Text = game.score.ToString();
         }
         private void btnUndo_Click(object sender, EventArgs e)
         {
@@ -95,18 +96,21 @@ namespace _2048
             {
                 game.updateState("down");
                 getGameState();
+                if (game.isFinished()) MessageBox.Show("Game Over");
                 return true;
             }
             if (keyData == Keys.Right)
             {
                 game.updateState("right");
                 getGameState();
+                if (game.isFinished()) MessageBox.Show("Game Over");
                 return true;
             }
             if (keyData == Keys.Left)
             {
                 game.updateState("left");
                 getGameState();
+                if (game.isFinished()) MessageBox.Show("Game Over");
                 return true;
             }
             return base.ProcessDialogKey(keyData);

@@ -35,7 +35,6 @@ namespace _2048
                 this.Show();
                 if (Properties.Settings.Default.savedGame) btnContinue.Enabled = true;
                 else btnContinue.Enabled = false;
-                Invalidate();
             }
             else
                 this.Close();
@@ -61,9 +60,13 @@ namespace _2048
         private void btnContinue_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form1 form1 = new Form1(Properties.Settings.Default.savedMode, Properties.Settings.Default.savedString);
+            Form1 form1 = new Form1(Properties.Settings.Default.savedMode, Properties.Settings.Default.savedString, Properties.Settings.Default.savedScore);
             if (form1.ShowDialog() == DialogResult.No)
+            {
                 this.Show();
+                if (Properties.Settings.Default.savedGame) btnContinue.Enabled = true;
+                else btnContinue.Enabled = false;
+            }
             else
                 this.Close();
         }

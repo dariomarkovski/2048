@@ -30,7 +30,7 @@ namespace _2048
                 {
                     if (ctrl is Button)
                     {
-                        (ctrl as Button).FlatAppearance.MouseDownBackColor = Color.Aqua;
+                        (ctrl as Button).FlatAppearance.MouseDownBackColor = Color.DarkBlue;
                     }
                 }
                 form.BackgroundImage = Properties.Resources.back_aqua;

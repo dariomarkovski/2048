@@ -38,13 +38,14 @@ namespace _2048
         }
         public State(string _matrix)
         {
+            string[] strSplit = _matrix.Split('_');
             matrix = new string[4][];
             for (int i = 0; i < 4; i++)
             {
                 matrix[i] = new string[4];
                 for (int j = 0; j < 4; j++)
                 {
-                    string str = _matrix[i * 4 + j].ToString();
+                    string str = strSplit[i * 4 + j].ToString();
                     if (str.Equals(" "))
                         matrix[i][j] = "";
                     else
@@ -79,7 +80,8 @@ namespace _2048
                 }
             }
         }
-        public void move(string key) {
+        public int move(string key) {
+            int score = 0;
             if (key.Equals("up"))
             {
                 bool moved = false;
@@ -105,6 +107,7 @@ namespace _2048
                     {
                         if (!matrix[i][k].Equals("") && matrix[i][k].Equals(matrix[i + 1][k]))
                         {
+                            score += Convert.ToInt32(matrix[i][k]) * 2;
                             matrix[i][k] = (Convert.ToInt32(matrix[i][k]) * 2).ToString();
                             matrix[i + 1][k] = "";
                             for (int j = i + 1; j < 3; j++)
@@ -143,6 +146,7 @@ namespace _2048
                     {
                         if (!matrix[i][k].Equals("") && matrix[i][k].Equals(matrix[i - 1][k]))
                         {
+                            score += Convert.ToInt32(matrix[i][k]) * 2;
                             matrix[i][k] = (Convert.ToInt32(matrix[i][k]) * 2).ToString();
                             matrix[i - 1][k] = "";
                             for (int j = i - 1; j >= 1; j--)
@@ -181,6 +185,7 @@ namespace _2048
                     {
                         if (!matrix[k][i].Equals("") && matrix[k][i].Equals(matrix[k][i - 1]))
                         {
+                            score += Convert.ToInt32(matrix[k][i]) * 2;
                             matrix[k][i] = (Convert.ToInt32(matrix[k][i]) * 2).ToString();
                             matrix[k][i - 1] = "";
                             for (int j = i - 1; j >= 1; j--)
@@ -219,6 +224,7 @@ namespace _2048
                     {
                         if (!matrix[k][i].Equals("") && matrix[k][i].Equals(matrix[k][i + 1]))
                         {
+                            score += Convert.ToInt32(matrix[k][i]) * 2;
                             matrix[k][i] = (Convert.ToInt32(matrix[k][i]) * 2).ToString();
                             matrix[k][i + 1] = "";
                             for (int j = i + 1; j < 3; j++)
@@ -232,6 +238,7 @@ namespace _2048
                 }
                 if (moved) generateRandom();
             }
+            return score;
         }
         public bool isFinished() {
             for(int i = 0; i < matrix.Length; i++)
@@ -248,6 +255,70 @@ namespace _2048
             }
             return true;
         }
+        public bool canMove(string key)
+        {
+            if (key.Equals("up"))
+            {
+                for (int k = 0; k < 4; k++)
+                {
+                    for(int i = 3; i >= 1; i--)
+                    {
+                        if (matrix[i][k].Equals("")) continue;
+                        for(int j = i -1; j >= 0; j--)
+                        {
+                            if (!matrix[j][k].Equals("") && !matrix[j][k].Equals(matrix[i][k])) break;
+                            return true;
+                        }
+                    }
+                }
+            }
+            if (key.Equals("down"))
+            {
+                for (int k = 0; k < 4; k++)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (matrix[i][k].Equals("")) continue;
+                        for (int j = i + 1; j < 4; j++)
+                        {
+                            if (!matrix[j][k].Equals("") && !matrix[j][k].Equals(matrix[i][k])) break;
+                            return true;
+                        }
+                    }
+                }
+            }
+            if (key.Equals("right"))
+            {
+                for (int k = 0; k < 4; k++)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (matrix[k][i].Equals("")) continue;
+                        for (int j = i + 1; j < 4; j++)
+                        {
+                            if (!matrix[k][j].Equals("") && !matrix[k][j].Equals(matrix[k][i])) break;
+                            return true;
+                        }
+                    }
+                }
+            }
+            if (key.Equals("left"))
+            {
+                for (int k = 0; k < 4; k++)
+                {
+                    for (int i = 3; i >= 1; i--)
+                    {
+                        if (matrix[k][i].Equals("")) continue;
+                        for (int j = i - 1; j >= 0; j--)
+                        {
+                            if (!matrix[k][j].Equals("") && !matrix[k][j].Equals(matrix[k][i])) break;
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
         public string getStringFormat()
         {
             string returnString = "";
@@ -257,6 +328,7 @@ namespace _2048
                 {
                     if (matrix[i][j].Equals("")) returnString += " ";
                     else returnString += matrix[i][j];
+                    returnString += "_";
                 }
             }
             return returnString;

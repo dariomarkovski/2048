@@ -35,12 +35,15 @@
             this.btnRight = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.lblTextScore = new System.Windows.Forms.Label();
+            this.lblScore = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnUndo
             // 
             this.btnUndo.BackColor = System.Drawing.Color.Beige;
             this.btnUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUndo.Font = new System.Drawing.Font("OCR A Extended", 20F);
             this.btnUndo.Location = new System.Drawing.Point(385, 12);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(147, 50);
@@ -110,6 +113,7 @@
             // 
             this.btnBack.BackColor = System.Drawing.Color.Beige;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Font = new System.Drawing.Font("OCR A Extended", 20F);
             this.btnBack.Location = new System.Drawing.Point(385, 324);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(147, 50);
@@ -118,12 +122,36 @@
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // lblTextScore
+            // 
+            this.lblTextScore.AutoSize = true;
+            this.lblTextScore.BackColor = System.Drawing.Color.Transparent;
+            this.lblTextScore.Font = new System.Drawing.Font("OCR A Extended", 16F);
+            this.lblTextScore.Location = new System.Drawing.Point(381, 261);
+            this.lblTextScore.Name = "lblTextScore";
+            this.lblTextScore.Size = new System.Drawing.Size(88, 24);
+            this.lblTextScore.TabIndex = 6;
+            this.lblTextScore.Text = "Score:";
+            // 
+            // lblScore
+            // 
+            this.lblScore.AutoSize = true;
+            this.lblScore.BackColor = System.Drawing.Color.Transparent;
+            this.lblScore.Font = new System.Drawing.Font("OCR A Extended", 16F);
+            this.lblScore.Location = new System.Drawing.Point(381, 285);
+            this.lblScore.Name = "lblScore";
+            this.lblScore.Size = new System.Drawing.Size(23, 24);
+            this.lblScore.TabIndex = 7;
+            this.lblScore.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(544, 386);
+            this.Controls.Add(this.lblScore);
+            this.Controls.Add(this.lblTextScore);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnRight);
@@ -138,6 +166,7 @@
             this.Text = "2048";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -149,6 +178,8 @@
         private System.Windows.Forms.Button btnRight;
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Label lblTextScore;
+        private System.Windows.Forms.Label lblScore;
     }
 }
 
