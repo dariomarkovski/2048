@@ -11,7 +11,7 @@ namespace _2048
         private State state;
         private List<State> lastState;
         private int numberAvailableUndos;
-        private string mode;
+        public string mode { get; private set; }
         public int score { get; private set; }
         private List<int> lastScores;
 

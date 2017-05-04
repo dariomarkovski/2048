@@ -74,6 +74,7 @@
             this.btnResetHS.TabIndex = 1;
             this.btnResetHS.Text = "Reset High Scores";
             this.btnResetHS.UseVisualStyleBackColor = false;
+            this.btnResetHS.Click += new System.EventHandler(this.btnResetHS_Click);
             // 
             // btnBack
             // 

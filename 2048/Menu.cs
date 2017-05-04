@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,12 @@ namespace _2048
         {
             InitializeComponent();
             setTheme();
+            /*
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            path += "HighScores.sc";
+            using (StreamWriter sw = File.AppendText(path))
+            {
+            }*/
         }
 
         public void setTheme()

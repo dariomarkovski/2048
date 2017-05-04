@@ -89,31 +89,50 @@ namespace _2048
             {
                 game.updateState("up");
                 getGameState();
-                if (game.isFinished()) MessageBox.Show("Game Over");
+                if (game.isFinished())
+                {
+                    finishGame();
+                }
                 return true;
             }
             if (keyData == Keys.Down)
             {
                 game.updateState("down");
                 getGameState();
-                if (game.isFinished()) MessageBox.Show("Game Over");
+                if (game.isFinished())
+                {
+                    finishGame();
+                }
                 return true;
             }
             if (keyData == Keys.Right)
             {
                 game.updateState("right");
                 getGameState();
-                if (game.isFinished()) MessageBox.Show("Game Over");
+                if (game.isFinished())
+                {
+                    finishGame();
+                }
                 return true;
             }
             if (keyData == Keys.Left)
             {
                 game.updateState("left");
                 getGameState();
-                if (game.isFinished()) MessageBox.Show("Game Over");
+                if (game.isFinished())
+                {
+                    finishGame();
+                }
                 return true;
             }
             return base.ProcessDialogKey(keyData);
+        }
+
+        private void finishGame()
+        {
+            SaveDialog sd = new SaveDialog(game.score.ToString(), game.mode);
+            sd.ShowDialog();
+            btnBack.PerformClick();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

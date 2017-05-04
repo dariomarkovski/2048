@@ -38,5 +38,16 @@ namespace _2048
             Properties.Settings.Default.Save();
             setTheme();
         }
+
+        private void btnResetHS_Click(object sender, EventArgs e)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            path += "HighScores.sc";
+            try
+            {
+                File.Delete(path);
+            }catch(Exception ex) { }
+
+        }
     }
 }
