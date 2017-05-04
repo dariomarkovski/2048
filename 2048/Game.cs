@@ -24,7 +24,6 @@ namespace _2048
             numberAvailableUndos = 0;
             score = 0;
         }
-
         public Game(string _mode)
         {
             state = new State();
@@ -57,7 +56,6 @@ namespace _2048
         {
             return state.matrix;
         }
-
         public void updateState(string key)
         {
             if (!state.canMove(key)) return;
@@ -84,7 +82,6 @@ namespace _2048
         {
             return lastState.Count > 0 ? true : false;
         }
-
         public void saveGame()
         {
             if (!state.isFinished())

@@ -35,7 +35,7 @@ namespace _2048
 
         private void tbName_Validating(object sender, CancelEventArgs e)
         {
-            if(tbName.Text.Trim(). Length == 0)
+            if(tbName.Text.Trim().Length == 0)
             {
                 e.Cancel = true;
                 errorProvider1.SetError(tbName, "You must enter a name to save");

@@ -66,6 +66,7 @@
             this.btnUp.Size = new System.Drawing.Size(50, 50);
             this.btnUp.TabIndex = 1;
             this.btnUp.UseVisualStyleBackColor = false;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // btnLeft
             // 
@@ -80,6 +81,7 @@
             this.btnLeft.Size = new System.Drawing.Size(50, 50);
             this.btnLeft.TabIndex = 2;
             this.btnLeft.UseVisualStyleBackColor = false;
+            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
             // 
             // btnRight
             // 
@@ -94,6 +96,7 @@
             this.btnRight.Size = new System.Drawing.Size(50, 50);
             this.btnRight.TabIndex = 3;
             this.btnRight.UseVisualStyleBackColor = false;
+            this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
             // 
             // btnDown
             // 
@@ -108,6 +111,7 @@
             this.btnDown.Size = new System.Drawing.Size(50, 50);
             this.btnDown.TabIndex = 4;
             this.btnDown.UseVisualStyleBackColor = false;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
             // btnBack
             // 

@@ -52,7 +52,7 @@ namespace _2048
             path += "HighScores.sc";
 
             List<Score> HighScores = new List<Score>();
-            //bin/Debug!
+            
             try
             {
                 using (TextReader sr = new StreamReader(path))

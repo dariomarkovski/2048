@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace _2048
 {
+    
     public partial class Form1 : Form, ITheme
     {
         TextBox[][] matrix;
@@ -23,6 +24,7 @@ namespace _2048
             game = new Game();
             generateMatrix();
             setTheme();
+            DoubleBuffered = true;
         }
         public Form1(string mode)
         {
@@ -39,6 +41,10 @@ namespace _2048
             generateMatrix();
             setTheme();
             DoubleBuffered = true;
+        }
+        public void setTheme()
+        {
+            Program.setTheme(this);
         }
         private void generateMatrix()
         {
@@ -61,6 +67,7 @@ namespace _2048
                     matrix[i][j].TextAlign = HorizontalAlignment.Center;
                     matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
                     this.Controls.Add(matrix[i][j]);
+
                 }
             }
             getGameState();
@@ -73,6 +80,82 @@ namespace _2048
                 for(int j = 0; j < matrix[i].Length; j++)
                 {
                     matrix[i][j].Text = matrixValues[i][j];
+                    switch (matrix[i][j].Text)
+                    {
+                        case "":
+                            matrix[i][j].BackColor = SystemColors.Control;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "2":
+                            matrix[i][j].BackColor = Color.Wheat;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "4":
+                            matrix[i][j].BackColor = Color.PeachPuff;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "8":
+                            matrix[i][j].BackColor = Color.Tan;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "16":
+                            matrix[i][j].BackColor = Color.Crimson;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "32":
+                            matrix[i][j].BackColor = Color.DarkRed;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "64":
+                            matrix[i][j].BackColor = Color.LightYellow;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "128":
+                            matrix[i][j].BackColor = Color.Yellow;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "256":
+                            matrix[i][j].BackColor = Color.Gold;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "512":
+                            matrix[i][j].BackColor = Color.Pink;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "1024":
+                            matrix[i][j].BackColor = Color.Magenta;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "2048":
+                            matrix[i][j].BackColor = Color.DarkMagenta;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "4096":
+                            matrix[i][j].BackColor = Color.PaleGreen;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "8192":
+                            matrix[i][j].BackColor = Color.SpringGreen;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 20);
+                            break;
+                        case "16384":
+                            matrix[i][j].BackColor = Color.Lime;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 18);
+                            break;
+                        case "32768":
+                            matrix[i][j].BackColor = Color.Turquoise;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 18);
+                            break;
+                        case "65536":
+                            matrix[i][j].BackColor = Color.DeepSkyBlue;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 18);
+                            break;
+                        case "131072":
+                            matrix[i][j].BackColor = Color.DarkBlue;
+                            matrix[i][j].Font = new Font(matrix[i][j].Font.FontFamily, 16);
+                            break;
+
+                    }
                 }
             }
             btnUndo.Enabled = game.canUndo();
@@ -87,69 +170,63 @@ namespace _2048
         {
             if (keyData == Keys.Up)
             {
-                game.updateState("up");
-                getGameState();
-                if (game.isFinished())
-                {
-                    finishGame();
-                }
-                return true;
+                return move("up");
             }
             if (keyData == Keys.Down)
             {
-                game.updateState("down");
-                getGameState();
-                if (game.isFinished())
-                {
-                    finishGame();
-                }
-                return true;
+                return move("down");
             }
             if (keyData == Keys.Right)
             {
-                game.updateState("right");
-                getGameState();
-                if (game.isFinished())
-                {
-                    finishGame();
-                }
-                return true;
+                return move("right");
             }
             if (keyData == Keys.Left)
             {
-                game.updateState("left");
-                getGameState();
-                if (game.isFinished())
-                {
-                    finishGame();
-                }
-                return true;
+                return move("left");
             }
             return base.ProcessDialogKey(keyData);
         }
-
+        private bool move(string move)
+        {
+            game.updateState(move);
+            getGameState();
+            if (game.isFinished())
+            {
+                finishGame();
+            }
+            return true;
+        }
         private void finishGame()
         {
             SaveDialog sd = new SaveDialog(game.score.ToString(), game.mode);
             sd.ShowDialog();
             btnBack.PerformClick();
         }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             game.saveGame();
         }
-
-        public void setTheme()
-        {
-            Program.setTheme(this);
-        }
-
         private void btnBack_Click(object sender, EventArgs e)
         {
             game.saveGame();
             this.DialogResult = DialogResult.No;
             this.Close();
+        }
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            this.ProcessDialogKey(Keys.Up);
+        }
+        private void btnLeft_Click(object sender, EventArgs e)
+        {
+            this.ProcessDialogKey(Keys.Left);
+        }
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            this.ProcessDialogKey(Keys.Down);
+        }
+        private void btnRight_Click(object sender, EventArgs e)
+        {
+            this.ProcessDialogKey(Keys.Right);
         }
     }
 }

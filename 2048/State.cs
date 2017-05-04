@@ -69,13 +69,19 @@ namespace _2048
             {
                 return;
             }
+
+            int prob = rnd.Next(1, 11);
+            string valueToInsert = "2";
+            if (prob > 8) valueToInsert = "4";
+                
+
             while (true)
             {
                 int row = rnd.Next(0, 4);
                 int col = rnd.Next(0, 4);
                 if (matrix[row][col].Equals(""))
                 {
-                    matrix[row][col] = "2";
+                    matrix[row][col] = valueToInsert;
                     break;
                 }
             }
