@@ -13,6 +13,7 @@ namespace _2048
         private int numberAvailableUndos;
         public string mode { get; private set; }
         public int score { get; private set; }
+        public bool won { get; private set; }
         private List<int> lastScores;
 
         public Game()
@@ -23,6 +24,7 @@ namespace _2048
             mode = "normal";
             numberAvailableUndos = 0;
             score = 0;
+            won = false;
         }
         public Game(string _mode)
         {
@@ -37,6 +39,7 @@ namespace _2048
                 numberAvailableUndos = 1;
             else if (mode.Equals("practice"))
                 numberAvailableUndos = 5;
+            won = false;
         }
         public Game(string savedMode, string savedGame, int savedScore)
         {
@@ -51,6 +54,7 @@ namespace _2048
                 numberAvailableUndos = 1;
             else if (savedMode.Equals("practice"))
                 numberAvailableUndos = 5;
+            won = false;
         }
         public string [][] getState()
         {
@@ -70,6 +74,9 @@ namespace _2048
                 lastScores.Add(score);
             }
             score += state.move(key);
+            if ( mode.Equals("normal") && state.wonValue()) {
+                won = true;
+            }
         }
         public void undoMove()
         {
@@ -84,7 +91,7 @@ namespace _2048
         }
         public void saveGame()
         {
-            if (!state.isFinished())
+            if (!state.isFinished() && !won )
             {
                 Properties.Settings.Default.savedGame = true;
                 Properties.Settings.Default.savedString = state.getStringFormat();

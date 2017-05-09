@@ -246,6 +246,17 @@ namespace _2048
             }
             return score;
         }
+        public bool wonValue()
+        {
+            for(int i = 0; i < matrix.Length; i++)
+            {
+                for(int j = 0; j < matrix.Length; j++)
+                {
+                    if (matrix[i][j].Equals("2048")) return true;
+                }
+            }
+            return false;
+        }
         public bool isFinished() {
             for(int i = 0; i < matrix.Length; i++)
             {

@@ -190,7 +190,7 @@ namespace _2048
         {
             game.updateState(move);
             getGameState();
-            if (game.isFinished())
+            if (game.isFinished() || game.won)
             {
                 finishGame();
             }
