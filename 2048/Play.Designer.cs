@@ -106,6 +106,8 @@
             this.Controls.Add(this.btnNewGame);
             this.Controls.Add(this.btnContinue);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(350, 355);
+            this.MinimumSize = new System.Drawing.Size(350, 355);
             this.Name = "Play";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "2048";
