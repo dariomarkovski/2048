@@ -25,15 +25,15 @@
   <li>Program – стартување на самата апликација, и поставување на темата</li>
 </ul>
 
-<p>Изглед на играта:</p>
+<h3>Изглед на играта:</h3>
 
 ![scrgame](https://cloud.githubusercontent.com/assets/24768187/26467349/89cc0d58-4192-11e7-9903-64fa30505306.png)
 
-<p>Изглед на New Game делот:</p>
+<h3>Изглед на New Game делот:</h3>
 
 ![scrnewgame](https://cloud.githubusercontent.com/assets/24768187/26467404/be7a9b96-4192-11e7-8819-a5cf59b2cf92.png)
 
-<p>Изглед на settings делот:</p>
+<h3>Изглед на settings делот:</h3>
 
 ![scrsettings](https://cloud.githubusercontent.com/assets/24768187/26467398/b4ed4d80-4192-11e7-8b1d-55bc4514a52f.png)
 
